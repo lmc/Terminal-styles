@@ -1,10 +1,9 @@
 class TerminalStyles
   MODES = {
-    :bright => 1,
-    :dim => 2,
-    :underline => 3,
-    :bold => 4,
-    :highlight => 7
+    :bold      => 1,
+    :underline => 4,
+    :flashing  => 5,
+    :inverted  => 7
   }
   MODES_KEYS = MODES.keys
   COLOURS = {
@@ -34,7 +33,7 @@ class TerminalStyles
   def self.cc(text,*options,&block)
     options.reject! { |opt| opt.nil? }
     
-    format = yield if block_given?
+    format = instance_eval(&block) if block_given?
     format = options.first.bind(self).call if options.first.respond_to?(:call)
         
     unless format     
