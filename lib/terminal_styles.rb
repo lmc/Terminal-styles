@@ -30,7 +30,7 @@ class TerminalStyles
   # TerminalStyles.cc("this is red",:red)
   # TerminalStyles.cc("an important message",:bg_yellow,:white,:bold)
   # TerminalStyles.cc("Full colour set~") { bg(1,3,5) }
-  def self.cc(text,*options,&block)
+  def self.style(text,*options,&block)
     options.reject! { |opt| opt.nil? }
     
     format = instance_eval(&block) if block_given?
@@ -54,7 +54,7 @@ class TerminalStyles
         end
       end
       
-      format = [mode,colour,background].reject { |v| v.nil? }.join(';')
+      format = [mode,colour,background].compact.join(';')
     end
     
     ["\e[",format,'m',text,"\e[0m"].join('')

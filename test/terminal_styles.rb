@@ -13,14 +13,15 @@ class TerminalStylesTest < Test::Unit::TestCase
       [["Inverted text",:inverted],                         "\e[7mInverted text\e[0m"],
       [["Aqua, inverted text",:aqua,:inverted],             "\e[7;36mAqua, inverted text\e[0m"],
       [["Full greyscale",proc { fg(10) }],                  "\e[38;5;242mFull greyscale\e[0m"],
-      [["Pink-ish",proc { fg(5,1,5) }],                     "\e[38;5;207mPink-ish\e[0m"]
+      [["Pink-ish",proc { fg(5,1,5) }],                     "\e[38;5;207mPink-ish\e[0m"],
+      [["Creamy background",proc { bg(4,4,2) }],            "\e[48;5;186mCreamy background\e[0m"]
     ]
     
     tests.each do |test_values|
       args,expected = *test_values
       block = args.pop if args.last.is_a?(Proc)
       test_name = args.first
-      output = TerminalStyles.cc(*args,&block)
+      output = TerminalStyles.style(*args,&block)
       puts output if $VERBOSE
       assert_equal expected, output, "#{test_name} failed"
     end

@@ -1,1 +1,43 @@
-Easy interface to styling text for terminal output.
+Terminal Styles
+An easy interface to styling text for terminal output.
+
+Usage:
+Include in your project and use TerminalStyles.style wherever you want terminal-formatted text, like directly outputting it, writing out logs, etc.
+
+First argument is always the text you want styled, the rest of the arguments are just any combination of the following styles, which are pretty self-explanatory:
+
+:bold
+:underline 
+:flashing
+:inverted
+
+:red
+:green
+:yellow
+:blue
+:magenta
+:aqua
+:white
+
+:bg_red
+:bg_green
+:bg_yellow
+:bg_blue
+:bg_magenta
+:bg_aqua
+:bg_white
+
+You can also output extended colours (only available on some terminal clients, iTerm being one) by passing in a block and calling bg() or fg() inside it. One argument will result in a greyscale colour, 0 being black and 15 being white. 3 args will be treated as a RGB, with values ranging from 0 as no colour and 5 as full colour.
+Examples:
+
+TerminalStyles.style("Pink-ish text") { fg(5,1,5) }
+TerminalStyles.style("Creamy background") { bg(4,4,2) }
+
+Unfortunately there is no way to combine full-colour backgrounds and foregrounds.
+
+Usage convenience:
+You may want to add this somewhere in the global scope to avoid having to type the full TerminalStyle.style call everywhere.
+
+def ts(*args,&block)
+  TerminalStyles.style(*args,&block)
+end
