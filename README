@@ -1,5 +1,6 @@
 Terminal Styles
 An easy interface to styling text for terminal output.
+By Luke Mcildoon, 2009, under the MIT licence.
 
 Usage:
 Include in your project and use TerminalStyles.style wherever you want terminal-formatted text, like directly outputting it, writing out logs, etc.
